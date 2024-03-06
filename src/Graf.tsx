@@ -13,7 +13,7 @@ import {
 
 import data from "./assets/data.json";
 
-const isMobile = window.innerWidth < 640;
+const isMobile = window.innerWidth < 620;
 
 
 
@@ -24,10 +24,11 @@ export default function Graf({ id }: { id: string }) {
     const title = data[numericId].title;
     const categories = data[numericId].categories;
     const groups = ["Euronadšenci", "Příznivci", "Vlažní příznivci", "Nejistí", "Odpůrci", "Skalní odpůrci"]
+    const colors = data[numericId].colors;
 
     return (
         <div>
-            <h2 className="text-center">{title}</h2>
+            <h2 className="text-center text-base">{title}</h2>
             <HighchartsProvider Highcharts={Highcharts}>
 
                 <HighchartsChart plotOptions={{
@@ -46,16 +47,16 @@ export default function Graf({ id }: { id: string }) {
                         states: { hover: { enabled: false } }, // disable hover
                     }
                 }}>
-                    <Chart type="bar" height={isMobile ? 115 : 176 * 0.7} marginLeft={120} marginBottom={0} marginRight={20} />
+                    <Chart type="bar" height={isMobile ? categories.length > 7 ? 185 : 115 : 176 * 0.7} marginLeft={110} marginBottom={0} marginRight={25} />
                     <XAxis type="category" categories={["Celá populace"]} />
                     <YAxis max={100} reversedStacks={false} labels={{ enabled: false }}>
                         {
                             categories.map((category, index) => {
-                                return <BarSeries key={crypto.randomUUID()} name={category} data={[thisData[0][index]]} stacking="normal" rever />
+                                return <BarSeries key={crypto.randomUUID()} name={category} color={colors[index]} data={[thisData[0][index]]} stacking="normal" rever />
                             })
                         }
                     </YAxis>
-                    <Legend verticalAlign='top' floating={false} />
+                    <Legend verticalAlign='top' floating={false} navigation={{ enabled: false }} />
                     <Tooltip valueDecimals={1} valueSuffix=" %" />
                 </HighchartsChart>
                 <HighchartsChart plotOptions={{
@@ -68,11 +69,11 @@ export default function Graf({ id }: { id: string }) {
                         states: { hover: { enabled: false } }, // disable hover
                     }
                 }}>
-                    <Chart type="bar" height={isMobile ? 240 : 320} margin={[0, 20, 50, 120]} />
+                    <Chart type="bar" height={isMobile ? 240 : 320} margin={[0, 25, 50, 110]} />
                     <XAxis type="category" categories={groups} />
                     <YAxis max={100} reversedStacks={false} labels={{ formatter: function () { return this.isLast ? `${this.value} %` : this.value.toString() } }}>
                         {categories.map((category, index) => {
-                            return <BarSeries key={crypto.randomUUID()} name={category} data={groups.map((_group, groupindex) => thisData[groupindex + 1][index])} stacking="normal" />
+                            return <BarSeries key={crypto.randomUUID()} name={category} color={colors[index]} data={groups.map((_group, groupindex) => thisData[groupindex + 1][index])} stacking="normal" />
                         }
                         )}
                     </YAxis>

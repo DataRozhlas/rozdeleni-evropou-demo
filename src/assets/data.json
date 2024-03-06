@@ -1,6 +1,11 @@
 [
     {
         "title": "Rozdíly podle úrovně materiálního zajištění",
+        "colors": [
+            "#5651ce",
+            "#ccc6c8",
+            "#db3d78"
+        ],
         "categories": [
             "Dobře",
             "Průměrně",
@@ -46,6 +51,16 @@
     },
     {
         "title": "Rozdíly podle regionu",
+        "colors": [
+            "#db3d78",
+            "#e8a6a6",
+            "#4850bc",
+            "#92b8dd",
+            "#f2c093",
+            "#d87d3f",
+            "#8bc9c7",
+            "#4da7bc"
+        ],
         "categories": [
             "Praha",
             "Střední Čechy",
@@ -131,6 +146,11 @@
     },
     {
         "title": "Rozdíly podle dosaženého vzdělání",
+        "colors": [
+            "#f2c093",
+            "#85a1e0",
+            "#4850bc"
+        ],
         "categories": [
             "ZŠ a bez maturity",
             "SŠ s maturitou",
@@ -176,10 +196,16 @@
     },
     {
         "title": "Rozdíly podle věkových skupin",
+        "colors": [
+            "#ce3272",
+            "#f78187",
+            "#f9b393",
+            "#cecbc8"
+        ],
         "categories": [
-            "18 až 29 let",
-            "30 až 44 let",
-            "45 až 59 let",
+            "18-29",
+            "30-44",
+            "45-59",
             "60 a více let"
         ],
         "data": [
