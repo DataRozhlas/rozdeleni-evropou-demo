@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Highcharts from 'highcharts';
 
 import {
@@ -13,9 +14,9 @@ import {
 
 import data from "./assets/data.json";
 
+import { usePostMessageWithHeight } from "./hooks/usePostHeightMessage";
+
 const isMobile = window.innerWidth < 620;
-
-
 
 export default function Graf({ id }: { id: string }) {
 
@@ -26,9 +27,15 @@ export default function Graf({ id }: { id: string }) {
     const groups = ["Euronadšenci", "Příznivci", "Vlažní příznivci", "Nejistí", "Odpůrci", "Skalní odpůrci"]
     const colors = data[numericId].colors;
 
+    const { containerRef, postHeightMessage } = usePostMessageWithHeight(`re-graf-${id}`);
+
+    useEffect(() => {
+        postHeightMessage();
+    }, []);
+
     return (
-        <div>
-            <h2 className="text-center text-base">{title}</h2>
+        <div ref={containerRef} >
+            <h2 className="text-center font-bold text-2xl">{title}</h2>
             <HighchartsProvider Highcharts={Highcharts}>
 
                 <HighchartsChart plotOptions={{
